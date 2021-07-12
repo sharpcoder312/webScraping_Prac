@@ -13,11 +13,18 @@ res.raise_for_status()
 
 soup = BeautifulSoup(res.text, "lxml")
 # 본인이 가져온 html문서를 lxml parser를 통해서 bs객체로 만든다. 즉, soup이라는 변수가 모든 정보를 다 가지고 있는 것.
-print(soup.title)
-# soup객체에 있는 첫번째 title element를 가져옴. 물론 다른 element들도 가져올 수 있음.
-print(soup.title.get_text())    # 첫번째 title element의 text node만 가져옴
+
+# 첫번째 자식요소 객체(element node) 가져오기
 print(soup.a)   # soup내에 있는 첫번째 a element 출력
+print(soup.title)
+
+# text node 가져오기
+print(soup.title.get_text())    # 첫번째 title element의 text node만 가져옴
+
+# 속성 가져오기
 print(soup.a.attrs)   # 딕셔너리 형태로 a element 의 속성들 출력
+
+# 속성 값 가져오기
 print(soup.a["href"])   # a element의 속성들 중 원하는 속성의 값 출력
 
 # 위의 방법들은 해당 페이지에 대한 이해가 높을시 사용하면 유용하다.
@@ -28,6 +35,7 @@ print(soup.find("a", attrs={"class": "Nbtn_upload"}))
 # 해당 attrs("class":"Nbtn_upload")를 가지고있는 a element 중 첫번째 element 가져옴.
 print(soup.find(attrs={"class": "Nbtn_upload"}))
 # element 노드는 생략도 가능. 앞에 써주는 것은 더 정확하게 하기위한 용도일 뿐이고 없다면 해당하는 모든 element가져옴
+# attrs도 생랼하고 "element"만 써줘도 가능할 듯하다.
 
 print(soup.find("li", attrs={"class": "rank01"}))
 rank1 = soup.find("li", attrs={"class": "rank01"})
